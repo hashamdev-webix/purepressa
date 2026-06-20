@@ -1,3 +1,15 @@
+const productImages = import.meta.glob(
+  "@/assets/images/products/*.{jpg,jpeg,png,webp}",
+  { eager: true, import: "default" },
+);
+
+const img = (id) =>
+  productImages[`/src/assets/images/products/${id}.jpg`] ||
+  productImages[`/src/assets/images/products/${id}.jpeg`] ||
+  productImages[`/src/assets/images/products/${id}.webp`] ||
+  productImages[`/src/assets/images/products/${id}.png`] ||
+  null;
+
 export const products = [
   {
     id: "signature-cold-pressed",
@@ -11,7 +23,8 @@ export const products = [
     salesFormat: "Single bottles, multi-packs, online orders, grocery retail",
     badges: ["Best Seller"],
     featured: true,
-    image: null,
+    tags: ["single-bottles", "multi-packs", "subscriptions"],
+    image: img("signature-cold-pressed"),
   },
   {
     id: "green-refresh",
@@ -25,7 +38,8 @@ export const products = [
     salesFormat: "Weekly packs, subscriptions, retail bottles",
     badges: [],
     featured: true,
-    image: null,
+    tags: ["single-bottles", "multi-packs", "subscriptions"],
+    image: img("green-refresh"),
   },
   {
     id: "citrus-ginger",
@@ -39,7 +53,8 @@ export const products = [
     salesFormat: "Single bottles, morning packs, grocery displays",
     badges: [],
     featured: true,
-    image: null,
+    tags: ["single-bottles", "multi-packs"],
+    image: img("citrus-ginger"),
   },
   {
     id: "berry-blends",
@@ -53,7 +68,8 @@ export const products = [
     salesFormat: "Family packs, variety packs, online bundles",
     badges: [],
     featured: true,
-    image: null,
+    tags: ["single-bottles", "multi-packs", "family-packs"],
+    image: img("berry-blends"),
   },
   {
     id: "hydration-blends",
@@ -67,7 +83,13 @@ export const products = [
     salesFormat: "Fitness bundles, gym partnerships, retail bottles",
     badges: [],
     featured: false,
-    image: null,
+    tags: [
+      "single-bottles",
+      "multi-packs",
+      "subscriptions",
+      "fitness-packs",
+    ],
+    image: img("hydration-blends"),
   },
   {
     id: "protein-enhanced",
@@ -81,7 +103,13 @@ export const products = [
     salesFormat: "Fitness packs, subscriptions, gym/wellness partners",
     badges: [],
     featured: true,
-    image: null,
+    tags: [
+      "single-bottles",
+      "multi-packs",
+      "subscriptions",
+      "fitness-packs",
+    ],
+    image: img("protein-enhanced"),
   },
   {
     id: "wellness-shots",
@@ -95,7 +123,8 @@ export const products = [
     salesFormat: "Single shots, wellness packs, add-ons, retail displays",
     badges: ["New"],
     featured: false,
-    image: null,
+    tags: ["single-bottles", "subscriptions"],
+    image: img("wellness-shots"),
   },
   {
     id: "wellness-variety-packs",
@@ -109,7 +138,13 @@ export const products = [
     salesFormat: "Website orders, local delivery, corporate accounts",
     badges: [],
     featured: true,
-    image: null,
+    tags: [
+      "multi-packs",
+      "subscriptions",
+      "family-packs",
+      "office-packs",
+    ],
+    image: img("wellness-variety-packs"),
   },
 ];
 

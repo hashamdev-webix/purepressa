@@ -1,54 +1,57 @@
+import { useCallback } from "react";
 import { Helmet } from "react-helmet-async";
-import { Leaf } from "lucide-react";
-import { Container } from "@/components/ui/Container";
-import { Section } from "@/components/ui/Section";
+import { useSearchParams } from "react-router-dom";
+import { BuildYourPackPromo } from "@/sections/shop/BuildYourPackPromo";
+import { CollectionIntro } from "@/sections/shop/CollectionIntro";
+import { FinalShopCTA } from "@/sections/shop/FinalShopCTA";
+import { ProductExplorer } from "@/sections/shop/ProductExplorer";
+import { ShopFAQ } from "@/sections/shop/ShopFAQ";
+import { ShopHero } from "@/sections/shop/ShopHero";
+import { ShopQuickBenefits } from "@/sections/shop/ShopQuickBenefits";
+import { SubscriptionPromo } from "@/sections/shop/SubscriptionPromo";
+import { WholesaleCTA } from "@/sections/shop/WholesaleCTA";
+import { shopContent } from "@/data/shop";
 
 export const Shop = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const scrollToProducts = useCallback(() => {
+    window.requestAnimationFrame(() => {
+      document
+        .getElementById("products")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, []);
+
+  const handleBestSellers = () => {
+    const next = new URLSearchParams(searchParams);
+    next.set("filter", "best-sellers");
+    next.delete("sort");
+    setSearchParams(next);
+    scrollToProducts();
+  };
+
+  const handleShopAll = () => {
+    setSearchParams(new URLSearchParams());
+    scrollToProducts();
+  };
+
   return (
     <>
       <Helmet>
-        <title>Shop Cold-Pressed Juices | PurePressa</title>
-        <meta
-          name="description"
-          content="Browse our full collection of fresh, cold-pressed juices and wellness beverages. Filter by category and find your perfect blend."
-        />
+        <title>Shop | PurePressa</title>
+        <meta name="description" content={shopContent.seoDescription} />
       </Helmet>
 
-      {/* Hero */}
-      <section className="bg-linear-to-b from-cream-soft to-surface py-16 md:py-24">
-        <Container>
-          <div className="max-w-3xl mx-auto text-center space-y-4">
-            <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-              Our Collection
-            </p>
-            <h1 className="text-4xl md:text-5xl font-bold text-ink">
-              Shop Cold-Pressed Juices
-            </h1>
-            <p className="text-base md:text-lg leading-relaxed text-body">
-              Browse our full range of fresh, nutrient-packed wellness beverages
-            </p>
-          </div>
-        </Container>
-      </section>
-
-      {/* Coming Soon */}
-      <Section>
-        <Container>
-          <div className="max-w-2xl mx-auto bg-cream rounded-card p-12 text-center space-y-6">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-surface rounded-card">
-              <Leaf className="w-10 h-10 text-primary" />
-            </div>
-            <h2 className="text-2xl font-semibold text-ink">
-              Full Shop Page Coming Soon
-            </h2>
-            <p className="text-body leading-relaxed">
-              We're crafting the perfect shopping experience with advanced
-              filtering, sorting, and search. Check back soon or explore our
-              featured products on the home page.
-            </p>
-          </div>
-        </Container>
-      </Section>
+      <ShopHero onBestSellers={handleBestSellers} />
+      <ShopQuickBenefits />
+      <CollectionIntro />
+      <ProductExplorer />
+      <BuildYourPackPromo />
+      <SubscriptionPromo />
+      <WholesaleCTA />
+      <ShopFAQ />
+      <FinalShopCTA onShopAll={handleShopAll} />
     </>
   );
 };

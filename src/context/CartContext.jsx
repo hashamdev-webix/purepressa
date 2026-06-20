@@ -1,6 +1,5 @@
-import { createContext, useState, useEffect, useMemo } from "react";
-
-export const CartContext = createContext(null);
+import { useState, useEffect, useMemo } from "react";
+import { CartContext } from "./CartContextValue";
 
 const STORAGE_KEY = "purepressa_cart";
 

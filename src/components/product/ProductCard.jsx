@@ -85,19 +85,24 @@ export const ProductCard = ({ product, className }) => {
                 size="sm"
                 variant="outline"
                 onClick={handleAddToCart}
-                aria-label="Add to cart"
+                aria-label={`Add ${product.name} to cart`}
               >
                 <ShoppingCart className="w-4 h-4" />
               </Button>
               <Button size="sm" onClick={handleOrderNow}>
-                Order
+                Order Now
               </Button>
             </div>
           ) : (
-            <Badge variant="muted">
+            <Button
+              size="sm"
+              variant="outline"
+              disabled
+              aria-label={`${product.name} coming soon`}
+            >
               <Sparkles className="w-3 h-3" />
               Coming Soon
-            </Badge>
+            </Button>
           )}
         </div>
       </div>

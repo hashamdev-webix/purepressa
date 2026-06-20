@@ -6,7 +6,6 @@ import { MobileMenu } from "./MobileMenu";
 import { Container } from "@/components/ui/Container";
 import { useCart } from "@/hooks/useCart";
 import { mainNav } from "@/data/navigation";
-import { cn } from "@/lib/cn";
 import logo from "@/assets/logo/logo-transparent.png";
 
 export const Navbar = () => {

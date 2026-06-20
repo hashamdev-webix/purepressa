@@ -168,7 +168,7 @@ Currency: CAD via `formatCurrency` (`Intl.NumberFormat("en-CA", { style:"currenc
 
 ## 8. Build Phases & Status
 
-### Phase 1 — Foundation + Home (CURRENT)
+### Phase 1 — Foundation + Home (COMPLETE)
 
 Audit the repo and check off what already exists; complete the rest.
 
@@ -188,9 +188,9 @@ Audit the repo and check off what already exists; complete the rest.
 - [x] Proper `README.md` (replaces Vite default — see §9 of spec)
 - [x] Verify: `npm run dev` no errors, `npm run build` passes, responsive 375/768/1280, no unused imports, no broken links/images
 
-### Roadmap (future, separate prompts — do NOT build now)
+### Roadmap
 
-- **Phase 2:** Shop page (filter sidebar + sort + search + product grid + sections)
+- [x] **Phase 2:** Shop page (filter sidebar + sort + search + product grid + promotional sections)
 - **Phase 3:** Bundles page
 - **Phase 4:** Subscriptions page
 - **Phase 5:** Wholesale + Contact (full forms with validation)
@@ -223,6 +223,13 @@ npm run preview  # preview the build
 - Known issues:
 - Next steps:
 ```
+
+### 2026-06-21 — Kiro / Claude Sonnet 4.6
+
+- Done: **Phase 2 COMPLETE.** Replaced the Shop stub with the full nine-section Shop experience: hero, quick benefits, collection intro, URL-synced product explorer, build-a-pack promo, subscription promo, wholesale CTA, FAQ, and final CTA. Added data-driven Shop copy/options, automatic product image discovery, product format tags, category/additional filters, debounced search, four sort modes, result count, empty state, responsive product grid, and an accessible mobile filter drawer with body scroll lock, focus trap, and Escape close. Updated ProductCard action labels/accessibility and unavailable-product state. Also resolved the existing lint issues in Navbar, CartContext, and Vite alias configuration. Verified category/tag/search/sort combinations, navbar-compatible query parameters, cart drawer, checkout routing, mobile layout, lint, and production build.
+- Decisions / deviations from spec: `docs/Purepressa_Phase1_Prompt.md` is still absent, so the attached Phase 2 specification was used as the content authority and missing subheading/supporting copy was written to match the established PurePressa tone. Search filters immediately in local state and syncs to `?search=` after 250 ms to prevent router updates from dropping rapid keystrokes. Additional format tags are stored in a comma-separated `tags` query parameter; best sellers retains the required `filter=best-sellers` parameter.
+- Known issues: Product imagery continues to use MediaPlaceholder until files named for product IDs are added under `src/assets/images/products/`. Bundles, Subscriptions, Wholesale, About, Contact, and Checkout remain intentionally scoped Phase 1 stubs.
+- Next steps: **Phase 3** — Build the full Bundles page.
 
 ### 2026-06-20 — Kiro / Claude Sonnet 4.5
 
