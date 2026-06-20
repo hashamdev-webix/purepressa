@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---- Brand colors (derived from the PurePressa logo) ---- */
+  --color-primary: #4f7a36;
+  --color-primary-dark: #3b5c29;
+  --color-primary-light: #6b9b4a;
+  --color-accent: #8cc63f;
+  --color-accent-dark: #6fa82f;
+
+  /* ---- Surfaces ---- */
+  --color-cream: #f4eedd;
+  --color-cream-soft: #faf6ec;
+  --color-surface: #ffffff;
+  --color-surface-alt: #fbf9f2;
+
+  /* ---- Text ---- */
+  --color-ink: #1e2a17;
+  --color-body: #3f4a37;
+  --color-muted: #6e7a65;
+
+  /* ---- Lines ---- */
+  --color-border: #e7e3d6;
+
+  /* ---- Feedback ---- */
+  --color-success: #4f7a36;
+  --color-danger: #c0492f;
+
+  /* ---- Typography ---- */
+  --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* ---- Radius ---- */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-card: 1.25rem;
+  --radius-lg: 1.75rem;
+  --radius-pill: 999px;
+
+  /* ---- Shadows ---- */
+  --shadow-soft: 0 4px 20px -6px rgba(31, 42, 23, 0.12);
+  --shadow-card: 0 10px 34px -12px rgba(31, 42, 23, 0.16);
+  --shadow-hover: 0 16px 40px -14px rgba(31, 42, 23, 0.22);
+
+  /* ---- Layout ---- */
+  --container-max: 1240px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-body);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
