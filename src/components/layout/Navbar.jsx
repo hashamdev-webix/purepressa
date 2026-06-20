@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/Container";
 import { useCart } from "@/hooks/useCart";
 import { mainNav } from "@/data/navigation";
 import { cn } from "@/lib/cn";
+import logo from "@/assets/logo/logo-transparent.png";
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,9 +21,14 @@ export const Navbar = () => {
             {/* Logo */}
             <Link
               to="/"
-              className="font-display text-xl md:text-2xl font-bold text-primary hover:text-primary-dark transition-colors"
+              aria-label="PurePressa home"
+              className="inline-flex items-center"
             >
-              PurePressa
+              <img
+                src={logo}
+                alt="PurePressa"
+                className="h-10 w-auto md:h-12"
+              />
             </Link>
 
             {/* Desktop Navigation */}

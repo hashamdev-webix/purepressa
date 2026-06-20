@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Leaf, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 
 export const Hero = () => {
   return (
@@ -51,11 +52,8 @@ export const Hero = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="aspect-square bg-cream rounded-card flex items-center justify-center">
-              <Leaf className="w-32 h-32 text-primary/20" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <p className="text-muted text-sm">Hero image placeholder</p>
-              </div>
+            <div className="aspect-square rounded-card overflow-hidden">
+              <MediaPlaceholder iconSize={64} />
             </div>
           </motion.div>
         </div>

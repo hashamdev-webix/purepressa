@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/SocialIcons";
 import { site } from "@/data/site";
 import { footerNav } from "@/data/navigation";
+import logo from "@/assets/logo/logo-transparent.png";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -18,9 +19,7 @@ export const Footer = () => {
         <div className="py-12 md:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="font-display text-xl font-bold text-primary">
-              {site.name}
-            </h3>
+            <img src={logo} alt="PurePressa" className="h-12 w-auto" />
             <p className="text-sm leading-relaxed text-body max-w-xs">
               {site.tagline}. Fresh, cold-pressed juices made locally in
               Calgary.
