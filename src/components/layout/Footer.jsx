@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
 import { Mail, MapPin } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import {
-  InstagramIcon,
-  FacebookIcon,
-  XIcon,
-} from "@/components/ui/SocialIcons";
+import { SocialLinks } from "@/components/ui/SocialIcons";
 import { site } from "@/data/site";
 import { footerNav } from "@/data/navigation";
 import logo from "@/assets/logo/logo-transparent.png";
@@ -24,35 +20,7 @@ export const Footer = () => {
               {site.tagline}. Fresh, cold-pressed juices made locally in
               Calgary.
             </p>
-            <div className="flex gap-3">
-              <a
-                href={site.socials.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-primary transition-colors hover:bg-primary hover:text-white"
-                aria-label="Instagram"
-              >
-                <InstagramIcon className="h-4 w-4" />
-              </a>
-              <a
-                href={site.socials.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-primary transition-colors hover:bg-primary hover:text-white"
-                aria-label="Facebook"
-              >
-                <FacebookIcon className="h-4 w-4" />
-              </a>
-              <a
-                href={site.socials.x}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-primary transition-colors hover:bg-primary hover:text-white"
-                aria-label="X (Twitter)"
-              >
-                <XIcon className="h-4 w-4" />
-              </a>
-            </div>
+            <SocialLinks socials={site.socials} />
           </div>
 
           {/* Shop Links */}

@@ -106,6 +106,7 @@ src/
 ├─ components/
 │  ├─ layout/  Layout, Navbar, NavDropdown, MobileMenu, Footer, ScrollToTop
 │  ├─ cart/    CartDrawer
+│  ├─ forms/   InquiryForm
 │  ├─ product/ ProductCard, BundleCard
 │  ├─ subscription/ SubscriptionPlanCard
 │  └─ ui/      Button, Container, Section, SectionHeading, Badge, Accordion,
@@ -113,9 +114,9 @@ src/
 ├─ sections/home/  Hero, QuickValuePoints, AboutIntro, ShopByCategory,
 │                  FeaturedProducts, BundlesPreview, SubscriptionPreview,
 │                  WholesalePreview, HowItWorks, WhyChooseUs, DeliveryPickup, FinalCTA
-├─ sections/{shop,bundles,subscriptions}/  Full page-specific section systems
-├─ pages/      Home, Shop, Bundles, Subscriptions (full); Wholesale, About,
-│              Contact, Checkout (stubs); NotFound
+├─ sections/{shop,bundles,subscriptions,wholesale,contact}/  Full page sections
+├─ pages/      Home, Shop, Bundles, Subscriptions, Wholesale, Contact (full);
+│              About, Checkout (stubs); NotFound
 ├─ context/    CartContext
 ├─ data/       site.js, navigation.js, categories.js, products.js, bundles.js, subscriptions.js
 ├─ hooks/      useCart, useScrollLock
@@ -195,8 +196,8 @@ Audit the repo and check off what already exists; complete the rest.
 - [x] **Phase 2:** Shop page (filter sidebar + sort + search + product grid + promotional sections)
 - [x] **Phase 3:** Bundles page (filter/search/sort grid + working custom pack builder)
 - [x] **Phase 4:** Subscriptions page (six plans + working custom subscription builder)
-- **Phase 5:** Wholesale + Contact (full forms with validation)
-- **Phase 6:** Checkout (full order summary + delivery/pickup form)
+- [x] **Phase 5:** Wholesale + Contact (full pages + accessible validated forms)
+- **Phase 6:** About + Checkout + final polish
 - **Later:** Backend (orders, real cart, subscriptions, form submission)
 
 ---
@@ -225,6 +226,13 @@ npm run preview  # preview the build
 - Known issues:
 - Next steps:
 ```
+
+### 2026-06-23 — Codex / GPT-5
+
+- Done: **Phase 5 COMPLETE.** Replaced the Wholesale and Contact stubs with two complete eight-section pages. Wholesale now includes its hero, six quick benefits, partner types, six product-option cards, green partnership panel, four-step process, validated partner inquiry form, and final CTA. Contact now includes its hero, six contact options, validated general inquiry form, contact details/social links, wholesale partnership panel, delivery/pickup support, responsive Calgary Google Map, and final CTA. Added data modules for both pages and a reusable schema-driven `InquiryForm` built on the extended `FormField`. Forms use controlled state, required/email/phone/dropdown validation, inline accessible errors, `aria-invalid`, `aria-describedby`, first-error focus, success replacement states, state reset, and no network submission. Added reusable social links, lazy-loaded both routes, and made global hash scrolling wait for lazy route targets. Verified form failure/success paths, focus management, scroll CTAs, Contact → Wholesale hash landing, map sizing, browser console, lint/build, and 375/768/1280 layouts without horizontal overflow.
+- Decisions / deviations from spec: Wholesale product cards use the existing ID-matched product imagery when available and retain `MediaPlaceholder` fallback. The map intentionally targets Calgary rather than the published street address, matching the Phase 5 instruction and leaving the requested TODO for an exact finalized location. Wholesale and Contact are route-split to keep the production build warning-free. Shared phone validation accepts common formatting characters and requires 7–15 digits.
+- Known issues: Both inquiry forms remain intentionally frontend-only and only display local success states until a service such as Resend or EmailJS is connected. Social URLs remain `#` placeholders. Wholesale and Contact hero art uses branded placeholders because no dedicated Phase 5 hero assets were provided. About and Checkout remain scoped stubs.
+- Next steps: **Phase 6** — Build the full About page, Checkout flow, and final cross-site polish.
 
 ### 2026-06-22 — Codex / GPT-5
 
