@@ -75,19 +75,28 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                     </Link>
                   ) : (
                     <div>
-                      <button
-                        onClick={() => toggleExpanded(index)}
-                        className="w-full flex items-center justify-between py-3 text-ink font-medium hover:text-primary transition-colors"
-                        aria-expanded={expandedIndex === index}
-                      >
-                        <span>{item.label}</span>
-                        <ChevronDown
-                          className={cn(
-                            "w-5 h-5 transition-transform",
-                            expandedIndex === index && "rotate-180",
-                          )}
-                        />
-                      </button>
+                      <div className="flex items-center justify-between py-3 gap-2">
+                        <Link
+                          to={item.to}
+                          onClick={onClose}
+                          className="flex-1 text-ink font-medium hover:text-primary transition-colors"
+                        >
+                          {item.label}
+                        </Link>
+                        <button
+                          onClick={() => toggleExpanded(index)}
+                          className="p-2 hover:bg-cream rounded-md transition-colors"
+                          aria-expanded={expandedIndex === index}
+                          aria-label={`Toggle ${item.label} submenu`}
+                        >
+                          <ChevronDown
+                            className={cn(
+                              "w-5 h-5 transition-transform",
+                              expandedIndex === index && "rotate-180",
+                            )}
+                          />
+                        </button>
+                      </div>
                       {expandedIndex === index && (
                         <div className="pl-4 pb-3 space-y-2">
                           {item.children.map((child, childIdx) => (

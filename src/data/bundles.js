@@ -1,3 +1,15 @@
+const bundleImages = import.meta.glob(
+  "@/assets/images/bundles/*.{jpg,jpeg,png,webp}",
+  { eager: true, import: "default" },
+);
+
+const img = (id) =>
+  bundleImages[`/src/assets/images/bundles/${id}.jpg`] ||
+  bundleImages[`/src/assets/images/bundles/${id}.jpeg`] ||
+  bundleImages[`/src/assets/images/bundles/${id}.webp`] ||
+  bundleImages[`/src/assets/images/bundles/${id}.png`] ||
+  null;
+
 export const bundles = [
   {
     id: "weekly-wellness-box",
@@ -10,7 +22,9 @@ export const bundles = [
     priceLabel: "$44.99 – $54.99",
     bestFor: "Weekly routines",
     filters: ["weekly", "subscription-eligible"],
-    image: null,
+    badges: ["Best Seller"],
+    featured: true,
+    image: img("weekly-wellness-box"),
   },
   {
     id: "family-variety-pack",
@@ -22,8 +36,10 @@ export const bundles = [
     price: 44.99,
     priceLabel: "$44.99 – $54.99",
     bestFor: "Families",
-    filters: ["family", "variety"],
-    image: null,
+    filters: ["family", "variety", "subscription-eligible"],
+    badges: ["Best Seller"],
+    featured: true,
+    image: img("family-variety-pack"),
   },
   {
     id: "office-beverage-pack",
@@ -35,8 +51,10 @@ export const bundles = [
     price: 44.99,
     priceLabel: "$44.99 – $54.99",
     bestFor: "Offices",
-    filters: ["office"],
-    image: null,
+    filters: ["office", "subscription-eligible"],
+    badges: [],
+    featured: true,
+    image: img("office-beverage-pack"),
   },
   {
     id: "fitness-lifestyle-pack",
@@ -48,8 +66,10 @@ export const bundles = [
     price: 44.99,
     priceLabel: "$44.99 – $54.99",
     bestFor: "Fitness routines",
-    filters: ["fitness"],
-    image: null,
+    filters: ["fitness", "subscription-eligible"],
+    badges: [],
+    featured: true,
+    image: img("fitness-lifestyle-pack"),
   },
   {
     id: "morning-routine-pack",
@@ -61,8 +81,10 @@ export const bundles = [
     price: 44.99,
     priceLabel: "$44.99 – $54.99",
     bestFor: "Morning routine",
-    filters: ["morning"],
-    image: null,
+    filters: ["morning", "subscription-eligible"],
+    badges: [],
+    featured: true,
+    image: img("morning-routine-pack"),
   },
   {
     id: "green-refresh-pack",
@@ -74,8 +96,10 @@ export const bundles = [
     price: 44.99,
     priceLabel: "$44.99 – $54.99",
     bestFor: "Green juice fans",
-    filters: ["variety"],
-    image: null,
+    filters: ["variety", "subscription-eligible"],
+    badges: [],
+    featured: false,
+    image: img("green-refresh-pack"),
   },
   {
     id: "hydration-pack",
@@ -87,8 +111,10 @@ export const bundles = [
     price: 44.99,
     priceLabel: "$44.99 – $54.99",
     bestFor: "Hydration",
-    filters: ["fitness"],
-    image: null,
+    filters: ["fitness", "subscription-eligible"],
+    badges: [],
+    featured: false,
+    image: img("hydration-pack"),
   },
   {
     id: "build-your-own-pack",
@@ -102,6 +128,8 @@ export const bundles = [
     bestFor: "Custom routines",
     filters: ["byo"],
     isBuilder: true,
-    image: null,
+    badges: [],
+    featured: true,
+    image: img("build-your-own-pack"),
   },
 ];

@@ -191,10 +191,10 @@ Audit the repo and check off what already exists; complete the rest.
 ### Roadmap
 
 - [x] **Phase 2:** Shop page (filter sidebar + sort + search + product grid + promotional sections)
-- **Phase 3:** Bundles page
+- [x] **Phase 3:** Bundles page (filter/search/sort grid + working custom pack builder)
 - **Phase 4:** Subscriptions page
 - **Phase 5:** Wholesale + Contact (full forms with validation)
-- **Phase 6:** Checkout (full order summary + delivery/pickup form) + Build Your Pack flow
+- **Phase 6:** Checkout (full order summary + delivery/pickup form)
 - **Later:** Backend (orders, real cart, subscriptions, form submission)
 
 ---
@@ -223,6 +223,20 @@ npm run preview  # preview the build
 - Known issues:
 - Next steps:
 ```
+
+### 2026-06-22 — Kiro / Claude Sonnet 4.5 (Navigation Fix)
+
+- Done: Made navbar parent items (Shop, Bundles, Subscriptions, Wholesale, About, Contact) clickable while preserving dropdown functionality. Desktop: split parent label into a clickable `<Link>` and a separate chevron button for keyboard dropdown toggle; hover still opens dropdown, clicking label navigates to parent page. Mobile: split parent row into a tappable `<Link>` that navigates and closes menu, plus a separate chevron button that expands/collapses accordion. Added proper ARIA attributes (aria-haspopup, aria-expanded, aria-label), focus-visible rings, Escape key handler. Both desktop and mobile now support direct navigation to parent pages AND drilling into child links. Verified build + dev server — no errors.
+- Decisions / deviations from spec: None — implemented exactly as specified.
+- Known issues: None introduced by this change.
+- Next steps: Continue with Phase 4 or other feature work.
+
+### 2026-06-22 — Kiro / Claude Sonnet 4.6
+
+- Done: **Phase 3 COMPLETE.** Replaced the Bundles stub with the full eleven-section Bundles experience: hero, quick benefits, bundle introduction, URL-synced bundle explorer, interactive Build Your Pack builder, subscription promo, office/bulk panel, bundle benefits, ordering steps, FAQ, and final CTA. Added automatic bundle image discovery, normalized filter tags, featured/best-seller metadata, deep-linked filtering, debounced search, four sort modes, empty state, responsive cards, and the accessible mobile filter drawer. Built a real three-step custom pack flow with 6/12-bottle targets, quantity controls, count cap, progress state, disabled unavailable products, order-type selection, computed subtotal, composed cart metadata, Add to Cart, and Order Now. Updated BundleCard builder/cart behavior, preserved custom cart metadata in CartContext, enhanced QuantitySelector labels, and route-split the Bundles page to keep the production build warning-free.
+- Decisions / deviations from spec: Bundle type remains in `?filter=` for navbar compatibility while sorting uses `?sort=` to avoid a query-parameter collision. The builder excludes the existing `packs` category because it represents a six-bottle product rather than an individual bottle; unavailable Wellness Shots remain visible but disabled. Custom pack pricing uses each product's low-end numeric price, matching existing cart conventions. The Bundles route is lazy-loaded at the route boundary after the new page pushed the main bundle over Vite's warning threshold.
+- Known issues: Bundle imagery remains on MediaPlaceholder until ID-matched files are added under `src/assets/images/bundles/`; only some product image assets currently exist. Subscriptions, Wholesale, About, Contact, and Checkout remain intentionally scoped stubs.
+- Next steps: **Phase 4** — Build the full Subscriptions page.
 
 ### 2026-06-21 — Kiro / Claude Sonnet 4.6
 

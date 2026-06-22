@@ -7,6 +7,9 @@ export const QuantitySelector = ({
   min = 1,
   max = 99,
   className,
+  decrementLabel = "Decrease quantity",
+  incrementLabel = "Increase quantity",
+  ...props
 }) => {
   const handleDecrement = () => {
     if (value > min) onChange(value - 1);
@@ -22,12 +25,13 @@ export const QuantitySelector = ({
         "inline-flex items-center border border-border rounded-md",
         className,
       )}
+      {...props}
     >
       <button
         onClick={handleDecrement}
         disabled={value <= min}
         className="p-2 hover:bg-surface-alt transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-        aria-label="Decrease quantity"
+        aria-label={decrementLabel}
       >
         <Minus className="w-4 h-4 text-ink" />
       </button>
@@ -38,7 +42,7 @@ export const QuantitySelector = ({
         onClick={handleIncrement}
         disabled={value >= max}
         className="p-2 hover:bg-surface-alt transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-        aria-label="Increase quantity"
+        aria-label={incrementLabel}
       >
         <Plus className="w-4 h-4 text-ink" />
       </button>

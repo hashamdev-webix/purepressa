@@ -6,7 +6,7 @@ import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { useCart } from "@/hooks/useCart";
 import { cn } from "@/lib/cn";
 
-export const BundleCard = ({ bundle, className }) => {
+export const BundleCard = ({ bundle, className, onBuild }) => {
   const navigate = useNavigate();
   const { addItem, openCart } = useCart();
 
@@ -22,7 +22,7 @@ export const BundleCard = ({ bundle, className }) => {
   const handleOrderNow = (e) => {
     e.stopPropagation();
     if (bundle.isBuilder) {
-      navigate("/bundles?build=true");
+      onBuild?.();
       return;
     }
     if (!isAvailable) return;
@@ -57,6 +57,15 @@ export const BundleCard = ({ bundle, className }) => {
             </Badge>
           </div>
         )}
+        {bundle.badges?.length > 0 && (
+          <div className="absolute top-3 left-3 flex flex-wrap gap-2">
+            {bundle.badges.map((badge) => (
+              <Badge key={badge} variant="primary">
+                {badge}
+              </Badge>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Content */}
@@ -86,7 +95,7 @@ export const BundleCard = ({ bundle, className }) => {
           </div>
           {bundle.isBuilder ? (
             <Button size="sm" variant="secondary" onClick={handleOrderNow}>
-              Build Now
+              Build Your Pack
             </Button>
           ) : isAvailable ? (
             <div className="flex gap-2">
@@ -94,12 +103,12 @@ export const BundleCard = ({ bundle, className }) => {
                 size="sm"
                 variant="outline"
                 onClick={handleAddToCart}
-                aria-label="Add to cart"
+                aria-label={`Add ${bundle.name} to cart`}
               >
                 <ShoppingCart className="w-4 h-4" />
               </Button>
               <Button size="sm" onClick={handleOrderNow}>
-                Order
+                Order Now
               </Button>
             </div>
           ) : (
