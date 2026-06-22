@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, Leaf, RefreshCw, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { shopContent } from "@/data/shop";
+import shopHero from "@/assets/images/hero/shop-hero.jpg";
 
 export const ShopHero = ({ onBestSellers }) => {
   const { hero } = shopContent;
@@ -59,8 +59,13 @@ export const ShopHero = ({ onBestSellers }) => {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="relative mx-auto w-full max-w-md"
           >
-            <div className="aspect-[4/5] overflow-hidden rounded-lg border border-border bg-cream shadow-card">
-              <MediaPlaceholder iconSize={84} />
+            <div className="aspect-[4/5] overflow-hidden rounded-lg border border-border shadow-card">
+              <img
+                src={shopHero}
+                alt="Assorted PurePressa cold-pressed juice bottles"
+                className="h-full w-full rounded-lg object-cover"
+                loading="eager"
+              />
             </div>
             <div className="absolute -bottom-5 left-4 right-4 rounded-card border border-border bg-surface/95 p-4 text-center shadow-soft backdrop-blur-sm sm:left-8 sm:right-8">
               <p className="font-display text-lg font-semibold text-ink">

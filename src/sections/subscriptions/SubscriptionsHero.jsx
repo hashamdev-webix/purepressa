@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, Leaf, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { subscriptionsContent } from "@/data/subscriptionsPage";
+import subsHero from "@/assets/images/hero/subscriptions-hero.jpg";
 
 export const SubscriptionsHero = ({ onViewPlans, onBuildSubscription }) => {
   const { hero } = subscriptionsContent;
@@ -42,11 +42,7 @@ export const SubscriptionsHero = ({ onViewPlans, onBuildSubscription }) => {
                 <RefreshCw className="h-5 w-5" />
                 View Plans
               </Button>
-              <Button
-                onClick={onBuildSubscription}
-                size="lg"
-                variant="outline"
-              >
+              <Button onClick={onBuildSubscription} size="lg" variant="outline">
                 Build Your Subscription
                 <ArrowRight className="h-5 w-5" />
               </Button>
@@ -62,8 +58,13 @@ export const SubscriptionsHero = ({ onViewPlans, onBuildSubscription }) => {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="relative mx-auto w-full max-w-md"
           >
-            <div className="aspect-[4/5] overflow-hidden rounded-lg border border-border bg-cream shadow-card">
-              <MediaPlaceholder iconSize={84} />
+            <div className="aspect-[4/5] overflow-hidden rounded-lg border border-border shadow-card">
+              <img
+                src={subsHero}
+                alt="PurePressa juice subscription delivery box"
+                className="h-full w-full rounded-lg object-cover"
+                loading="eager"
+              />
             </div>
             <div className="absolute -bottom-5 left-4 right-4 rounded-card border border-border bg-surface/95 p-4 text-center shadow-soft backdrop-blur-sm sm:left-8 sm:right-8">
               <p className="font-display text-lg font-semibold text-ink">

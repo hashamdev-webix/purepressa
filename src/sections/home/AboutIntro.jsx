@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Leaf } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import aboutImg from "@/assets/images/about/about-intro.jpg";
 
 export const AboutIntro = () => {
   return (
@@ -17,11 +18,13 @@ export const AboutIntro = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <div className="aspect-[4/3] bg-surface rounded-card flex items-center justify-center relative overflow-hidden">
-              <Leaf className="w-24 h-24 text-primary/10" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <p className="text-muted text-sm">About image placeholder</p>
-              </div>
+            <div className="aspect-[4/3] rounded-card overflow-hidden">
+              <img
+                src={aboutImg}
+                alt="Fresh juice being cold-pressed"
+                className="h-full w-full rounded-card object-cover"
+                loading="lazy"
+              />
             </div>
           </motion.div>
 

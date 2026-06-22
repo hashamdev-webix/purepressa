@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
+import subPromo from "@/assets/images/subscriptions/subscription-promo.jpg";
 
 const benefits = [
   "Never run out of your favorite juices",
@@ -58,13 +59,13 @@ export const SubscriptionPreview = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <div className="aspect-square bg-surface rounded-card flex items-center justify-center relative overflow-hidden shadow-card">
-              <RefreshCw className="w-32 h-32 text-primary/10" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <p className="text-muted text-sm">
-                  Subscription visual placeholder
-                </p>
-              </div>
+            <div className="aspect-square rounded-card overflow-hidden shadow-card">
+              <img
+                src={subPromo}
+                alt="Weekly PurePressa juice subscription bottles"
+                className="h-full w-full rounded-card object-cover"
+                loading="lazy"
+              />
             </div>
           </motion.div>
         </div>

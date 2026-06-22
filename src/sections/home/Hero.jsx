@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Leaf, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import homeHero from "@/assets/images/hero/home-hero.jpg";
 
 export const Hero = () => {
   return (
@@ -53,7 +53,12 @@ export const Hero = () => {
             className="relative"
           >
             <div className="aspect-square rounded-card overflow-hidden">
-              <MediaPlaceholder iconSize={64} />
+              <img
+                src={homeHero}
+                alt="Fresh PurePressa cold-pressed juices with fruits and greens"
+                className="h-full w-full rounded-card object-cover"
+                loading="eager"
+              />
             </div>
           </motion.div>
         </div>

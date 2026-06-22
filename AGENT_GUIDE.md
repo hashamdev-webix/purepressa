@@ -233,6 +233,13 @@ npm run preview  # preview the build
 - Known issues: No files currently exist under `src/assets/images/subscriptions/`, so the six plan cards use branded placeholders. Recurring-order account management and actual subscription billing remain frontend-only future backend work. Wholesale, About, Contact, and Checkout remain intentionally scoped stubs.
 - Next steps: **Phase 5** — Build the full Wholesale and Contact pages with client-side validation.
 
+### 2026-06-23 — Kiro / Claude Sonnet 4.5 (Image Wiring)
+
+- Done: Wired up six hero/section images from src/assets/images/ into their respective components. Replaced MediaPlaceholder with actual images in: Home Hero (home-hero.jpg), Home About section (about-intro.jpg), Home Subscription Preview (subscription-promo.jpg), Shop Hero (shop-hero.jpg), Bundles Hero (bundles-hero.jpg), and Subscriptions Hero (subscriptions-hero.jpg). All images properly imported, rendered with correct aspect ratios, rounded corners, object-cover, appropriate alt text, and loading strategy (eager for hero images, lazy for section images). Layout and decorative elements (floating caption cards, leaf accents) preserved exactly. Removed unused MediaPlaceholder imports. Build passes clean, dev server runs without errors.
+- Decisions / deviations from spec: None — all six specified images exist and were wired exactly as requested.
+- Known issues: None introduced by this change.
+- Next steps: Continue with Phase 4 or other feature work.
+
 ### 2026-06-22 — Kiro / Claude Sonnet 4.5 (Navigation Fix)
 
 - Done: Made navbar parent items (Shop, Bundles, Subscriptions, Wholesale, About, Contact) clickable while preserving dropdown functionality. Desktop: split parent label into a clickable `<Link>` and a separate chevron button for keyboard dropdown toggle; hover still opens dropdown, clicking label navigates to parent page. Mobile: split parent row into a tappable `<Link>` that navigates and closes menu, plus a separate chevron button that expands/collapses accordion. Added proper ARIA attributes (aria-haspopup, aria-expanded, aria-label), focus-visible rings, Escape key handler. Both desktop and mobile now support direct navigation to parent pages AND drilling into child links. Verified build + dev server — no errors.

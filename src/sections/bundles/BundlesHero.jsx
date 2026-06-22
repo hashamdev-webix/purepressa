@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, Leaf, Package, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { bundlesContent } from "@/data/bundlesPage";
+import bundlesHero from "@/assets/images/hero/bundles-hero.jpg";
 
 export const BundlesHero = ({ onShopBundles, onBuildPack }) => {
   const { hero } = bundlesContent;
@@ -59,8 +59,13 @@ export const BundlesHero = ({ onShopBundles, onBuildPack }) => {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="relative mx-auto w-full max-w-md"
           >
-            <div className="aspect-[4/5] overflow-hidden rounded-lg border border-border bg-cream shadow-card">
-              <MediaPlaceholder iconSize={84} />
+            <div className="aspect-[4/5] overflow-hidden rounded-lg border border-border shadow-card">
+              <img
+                src={bundlesHero}
+                alt="A box of assorted PurePressa juice bundles"
+                className="h-full w-full rounded-lg object-cover"
+                loading="eager"
+              />
             </div>
             <div className="absolute -bottom-5 left-4 right-4 rounded-card border border-border bg-surface/95 p-4 text-center shadow-soft backdrop-blur-sm sm:left-8 sm:right-8">
               <p className="font-display text-lg font-semibold text-ink">
