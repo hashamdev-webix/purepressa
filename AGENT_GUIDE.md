@@ -107,13 +107,15 @@ src/
 │  ├─ layout/  Layout, Navbar, NavDropdown, MobileMenu, Footer, ScrollToTop
 │  ├─ cart/    CartDrawer
 │  ├─ product/ ProductCard, BundleCard
+│  ├─ subscription/ SubscriptionPlanCard
 │  └─ ui/      Button, Container, Section, SectionHeading, Badge, Accordion,
 │              QuantitySelector, FormField, MediaPlaceholder
 ├─ sections/home/  Hero, QuickValuePoints, AboutIntro, ShopByCategory,
 │                  FeaturedProducts, BundlesPreview, SubscriptionPreview,
 │                  WholesalePreview, HowItWorks, WhyChooseUs, DeliveryPickup, FinalCTA
-├─ pages/      Home (full), Shop, Bundles, Subscriptions, Wholesale, About,
-│              Contact, Checkout, NotFound  (all except Home are stubs in Phase 1)
+├─ sections/{shop,bundles,subscriptions}/  Full page-specific section systems
+├─ pages/      Home, Shop, Bundles, Subscriptions (full); Wholesale, About,
+│              Contact, Checkout (stubs); NotFound
 ├─ context/    CartContext
 ├─ data/       site.js, navigation.js, categories.js, products.js, bundles.js, subscriptions.js
 ├─ hooks/      useCart, useScrollLock
@@ -192,7 +194,7 @@ Audit the repo and check off what already exists; complete the rest.
 
 - [x] **Phase 2:** Shop page (filter sidebar + sort + search + product grid + promotional sections)
 - [x] **Phase 3:** Bundles page (filter/search/sort grid + working custom pack builder)
-- **Phase 4:** Subscriptions page
+- [x] **Phase 4:** Subscriptions page (six plans + working custom subscription builder)
 - **Phase 5:** Wholesale + Contact (full forms with validation)
 - **Phase 6:** Checkout (full order summary + delivery/pickup form)
 - **Later:** Backend (orders, real cart, subscriptions, form submission)
@@ -223,6 +225,13 @@ npm run preview  # preview the build
 - Known issues:
 - Next steps:
 ```
+
+### 2026-06-22 — Codex / GPT-5
+
+- Done: **Phase 4 COMPLETE.** Replaced the Subscriptions stub with the full nine-section experience: branded hero, eight quick benefits, four-step process, six subscription plans, three-step custom subscription builder, four popular subscription cards, office/business panel, subscription benefits, and final CTA. Normalized `subscriptions.js` with six tiered/contact/builder plans and automatic subscription image discovery, added page-level data, created a reusable `SubscriptionPlanCard`, and implemented working tier selection, Add to Cart, Order Now, contact routing, and builder scrolling. The custom builder adapts the Phase 3 pack flow with 6/12-bottle targets, quantity caps, progress, frequency selection, live subtotal, composed cart metadata, and checkout routing. Route-split Subscriptions to keep the production build warning-free. Verified lint/build, browser console, plan and preview cart entries, checkout routes, builder behavior, and 375/768/1280 layouts with no horizontal overflow.
+- Decisions / deviations from spec: The builder excludes the existing multi-bottle `packs` product because each selection represents one bottle; Wellness Shots remain visible but disabled because their price is `null`. Cart math uses each product's low-end numeric price, consistent with the existing data/cart convention. Subscription plan images intentionally fall back to `MediaPlaceholder` until ID-matched files are added. The Subscriptions route is lazy-loaded at the route boundary for bundle-size control.
+- Known issues: No files currently exist under `src/assets/images/subscriptions/`, so the six plan cards use branded placeholders. Recurring-order account management and actual subscription billing remain frontend-only future backend work. Wholesale, About, Contact, and Checkout remain intentionally scoped stubs.
+- Next steps: **Phase 5** — Build the full Wholesale and Contact pages with client-side validation.
 
 ### 2026-06-22 — Kiro / Claude Sonnet 4.5 (Navigation Fix)
 

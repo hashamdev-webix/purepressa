@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Home } from "@/pages/Home";
 import { Shop } from "@/pages/Shop";
-import { Subscriptions } from "@/pages/Subscriptions";
 import { Wholesale } from "@/pages/Wholesale";
 import { About } from "@/pages/About";
 import { Contact } from "@/pages/Contact";
@@ -12,6 +11,12 @@ import { NotFound } from "@/pages/NotFound";
 
 const Bundles = lazy(() =>
   import("@/pages/Bundles").then((module) => ({ default: module.Bundles })),
+);
+
+const Subscriptions = lazy(() =>
+  import("@/pages/Subscriptions").then((module) => ({
+    default: module.Subscriptions,
+  })),
 );
 
 const BundlesRoute = () => (
@@ -29,6 +34,21 @@ const BundlesRoute = () => (
   </Suspense>
 );
 
+const SubscriptionsRoute = () => (
+  <Suspense
+    fallback={
+      <div
+        className="flex min-h-[50vh] items-center justify-center bg-cream-soft text-primary"
+        role="status"
+      >
+        Loading subscriptions…
+      </div>
+    }
+  >
+    <Subscriptions />
+  </Suspense>
+);
+
 export const AppRoutes = () => {
   return (
     <Routes>
@@ -36,7 +56,7 @@ export const AppRoutes = () => {
         <Route index element={<Home />} />
         <Route path="shop" element={<Shop />} />
         <Route path="bundles" element={<BundlesRoute />} />
-        <Route path="subscriptions" element={<Subscriptions />} />
+        <Route path="subscriptions" element={<SubscriptionsRoute />} />
         <Route path="wholesale" element={<Wholesale />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />

@@ -1,53 +1,99 @@
+const subImages = import.meta.glob(
+  "@/assets/images/subscriptions/*.{jpg,jpeg,png,webp}",
+  { eager: true, import: "default" },
+);
+
+const img = (id) =>
+  subImages[`/src/assets/images/subscriptions/${id}.jpg`] ||
+  subImages[`/src/assets/images/subscriptions/${id}.jpeg`] ||
+  subImages[`/src/assets/images/subscriptions/${id}.webp`] ||
+  subImages[`/src/assets/images/subscriptions/${id}.png`] ||
+  null;
+
 export const subscriptions = [
   {
-    id: "weekly-juice-delivery",
-    name: "Weekly Juice Delivery",
+    id: "weekly-wellness",
+    name: "Weekly Wellness",
     description:
-      "Regular weekly delivery of fresh cold-pressed juices. Choose a pre-built box or customize your weekly selection.",
+      "A reliable weekly box of bottled juices and wellness beverages for customers building a consistent routine.",
     frequency: "Weekly",
-    bestFor: "Daily juice routines",
+    bestFor: "Everyday wellness routines",
     tiers: [
-      { label: "6-Bottle Box", price: 44.99, unit: "/week" },
-      { label: "12-Bottle Box", price: 84.99, unit: "/week" },
+      { label: "6 Bottles", price: 44.99, unit: "/week" },
+      { label: "12 Bottles", price: 84.99, unit: "/week" },
     ],
-    image: null,
+    badges: ["Most Popular"],
+    image: img("weekly-wellness"),
   },
   {
-    id: "biweekly-wellness-box",
-    name: "Biweekly Wellness Box",
+    id: "biweekly-juice",
+    name: "Biweekly Juice",
     description:
-      "Flexible biweekly delivery for customers who want fresh juices without weekly commitment.",
+      "Flexible delivery every two weeks for customers who want regular PurePressa without a weekly schedule.",
     frequency: "Biweekly",
-    bestFor: "Flexible routines",
+    bestFor: "Flexible home and work routines",
     tiers: [
-      { label: "6-Bottle Box", price: 44.99, unit: "/delivery" },
-      { label: "12-Bottle Box", price: 84.99, unit: "/delivery" },
+      { label: "6 Bottles", price: 44.99, unit: "/delivery" },
+      { label: "12 Bottles", price: 84.99, unit: "/delivery" },
     ],
-    image: null,
+    badges: [],
+    image: img("biweekly-juice"),
   },
   {
-    id: "monthly-subscription",
-    name: "Monthly Subscription",
+    id: "monthly-family",
+    name: "Monthly Family",
     description:
-      "Monthly delivery of curated juice packs. Perfect for less frequent wellness routines.",
+      "A larger monthly variety box designed to keep convenient bottled beverages ready for the household.",
     frequency: "Monthly",
-    bestFor: "Occasional refreshment",
+    bestFor: "Families and shared fridges",
     tiers: [
-      { label: "6-Bottle Box", price: 44.99, unit: "/month" },
-      { label: "12-Bottle Box", price: 84.99, unit: "/month" },
+      { label: "12 Bottles", price: 89.99, unit: "/month" },
+      { label: "24 Bottles", price: 169.99, unit: "/month" },
     ],
-    image: null,
+    badges: [],
+    image: img("monthly-family"),
   },
   {
-    id: "build-your-box",
-    name: "Build Your Box",
+    id: "fitness-lifestyle",
+    name: "Fitness Lifestyle",
     description:
-      "Fully customizable subscription. Select your delivery frequency, bottle count, and exact juice selection each cycle.",
-    frequency: "Your choice",
+      "Hydration and protein-enhanced beverage options delivered for active routines, workouts, and recovery.",
+    frequency: "Weekly or Biweekly",
+    bestFor: "Active customers and gym routines",
+    tiers: [
+      { label: "6 Bottles", price: 49.99, unit: "/delivery" },
+      { label: "12 Bottles", price: 94.99, unit: "/delivery" },
+    ],
+    badges: [],
+    image: img("fitness-lifestyle"),
+  },
+  {
+    id: "office-wellness",
+    name: "Office Wellness",
+    description:
+      "Recurring bottled juice and wellness beverage supply for office fridges, teams, gyms, cafés, and studios.",
+    frequency: "Recurring business schedule",
+    bestFor: "Offices and local businesses",
+    tiers: [],
+    priceNote: "Custom recurring business pricing",
+    ctaType: "contact",
+    badges: [],
+    image: img("office-wellness"),
+  },
+  {
+    id: "build-your-own",
+    name: "Build Your Own",
+    description:
+      "Choose your bottle count, preferred products, and recurring frequency for a fully customized subscription.",
+    frequency: "Weekly, Biweekly, or Monthly",
     bestFor: "Custom preferences",
-    priceNote: "Pricing based on selection",
-    ctaType: "customize",
+    tiers: [
+      { label: "6 Bottles", price: 44.99, unit: "/delivery" },
+      { label: "12 Bottles", price: 84.99, unit: "/delivery" },
+    ],
+    priceNote: "From $44.99",
     isBuilder: true,
-    image: null,
+    badges: [],
+    image: img("build-your-own"),
   },
 ];
