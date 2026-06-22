@@ -43,6 +43,9 @@ export const MobileMenu = ({ isOpen, onClose }) => {
             exit={{ x: "-100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
             className="fixed top-0 left-0 bottom-0 w-[85vw] max-w-sm bg-surface z-50 lg:hidden overflow-y-auto"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
           >
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-border">
@@ -50,6 +53,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                 PurePressa
               </span>
               <button
+                type="button"
                 onClick={onClose}
                 className="p-2 hover:bg-cream rounded-md transition-colors"
                 aria-label="Close menu"
@@ -84,6 +88,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                           {item.label}
                         </Link>
                         <button
+                          type="button"
                           onClick={() => toggleExpanded(index)}
                           className="p-2 hover:bg-cream rounded-md transition-colors"
                           aria-expanded={expandedIndex === index}

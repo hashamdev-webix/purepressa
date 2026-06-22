@@ -45,6 +45,7 @@ export const Navbar = () => {
             {/* Actions */}
             <div className="flex items-center gap-4">
               <button
+                type="button"
                 onClick={toggleCart}
                 className="relative p-2 hover:bg-cream rounded-md transition-colors"
                 aria-label="Open cart"
@@ -58,6 +59,7 @@ export const Navbar = () => {
               </button>
 
               <button
+                type="button"
                 onClick={() => setMobileMenuOpen(true)}
                 className="lg:hidden p-2 hover:bg-cream rounded-md transition-colors"
                 aria-label="Open menu"

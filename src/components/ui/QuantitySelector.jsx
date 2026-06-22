@@ -28,6 +28,7 @@ export const QuantitySelector = ({
       {...props}
     >
       <button
+        type="button"
         onClick={handleDecrement}
         disabled={value <= min}
         className="p-2 hover:bg-surface-alt transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
@@ -39,6 +40,7 @@ export const QuantitySelector = ({
         {value}
       </span>
       <button
+        type="button"
         onClick={handleIncrement}
         disabled={value >= max}
         className="p-2 hover:bg-surface-alt transition-colors disabled:opacity-30 disabled:cursor-not-allowed"

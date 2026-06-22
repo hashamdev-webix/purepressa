@@ -65,6 +65,7 @@ export const NavDropdown = ({ label, to, children }) => {
           {label}
         </Link>
         <button
+          type="button"
           onClick={toggleDropdown}
           className={cn(
             "p-1 rounded hover:bg-cream transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2",

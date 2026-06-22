@@ -2,9 +2,7 @@ import { useRef, useState } from "react";
 import { CheckCircle2, Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { FormField } from "@/components/ui/FormField";
-
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const phonePattern = /^[+\d\s().-]+$/;
+import { isValidEmail, isValidPhone } from "@/lib/validation";
 
 const getInitialValues = (fields) =>
   Object.fromEntries(fields.map((field) => [field.name, ""]));
@@ -31,19 +29,12 @@ export const InquiryForm = ({
         return;
       }
 
-      if (value && field.type === "email" && !emailPattern.test(value)) {
+      if (value && field.type === "email" && !isValidEmail(value)) {
         nextErrors[field.name] = "Enter a valid email address.";
       }
 
-      if (value && field.type === "tel") {
-        const digits = value.replace(/\D/g, "");
-        if (
-          !phonePattern.test(value) ||
-          digits.length < 7 ||
-          digits.length > 15
-        ) {
-          nextErrors[field.name] = "Enter a valid phone number.";
-        }
+      if (value && field.type === "tel" && !isValidPhone(value)) {
+        nextErrors[field.name] = "Enter a valid phone number.";
       }
     });
 

@@ -49,11 +49,20 @@ export const CartDrawer = () => {
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
             className="fixed top-0 right-0 bottom-0 w-[90vw] max-w-md bg-surface z-50 flex flex-col shadow-hover"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cart-drawer-title"
           >
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-border">
-              <h2 className="text-xl font-semibold text-ink">Your Cart</h2>
+              <h2
+                id="cart-drawer-title"
+                className="text-xl font-semibold text-ink"
+              >
+                Your Cart
+              </h2>
               <button
+                type="button"
                 onClick={closeCart}
                 className="p-2 hover:bg-cream rounded-md transition-colors"
                 aria-label="Close cart"
@@ -106,9 +115,10 @@ export const CartDrawer = () => {
                             )}
                           </div>
                           <button
+                            type="button"
                             onClick={() => removeItem(item.id)}
                             className="p-1 hover:bg-cream rounded transition-colors flex-shrink-0"
-                            aria-label="Remove item"
+                            aria-label={`Remove ${item.name}`}
                           >
                             <Trash2 className="w-4 h-4 text-danger" />
                           </button>

@@ -33,7 +33,7 @@ export const NotFound = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button as={Link} to="/" size="lg">
                 <Home className="w-5 h-5" />
-                Go Home
+                Back to Home
               </Button>
               <Button as={Link} to="/shop" size="lg" variant="outline">
                 <Search className="w-5 h-5" />
