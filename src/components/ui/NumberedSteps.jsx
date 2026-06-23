@@ -10,7 +10,7 @@ export const NumberedSteps = ({
   <div
     data-numbered-steps
     className={cn(
-      "grid items-stretch gap-x-6 gap-y-8 md:grid-cols-2 lg:grid-cols-4",
+      "grid items-start gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-4",
       className,
     )}
   >
@@ -26,7 +26,7 @@ export const NumberedSteps = ({
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
           className={cn(
-            "flex min-h-[270px] flex-col items-center rounded-card border border-border bg-surface p-6 text-center",
+            "flex flex-col items-center rounded-card border border-border bg-surface p-6 text-center",
             cardClassName,
           )}
         >

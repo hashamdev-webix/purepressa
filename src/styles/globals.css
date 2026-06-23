@@ -43,7 +43,7 @@
   --shadow-hover: 0 16px 40px -14px rgba(31, 42, 23, 0.22);
 
   /* ---- Layout ---- */
-  --container-max: 1240px;
+  --container-max: 1840px;
 }
 
 @layer base {

@@ -24,10 +24,10 @@ export const AboutHero = () => {
   return (
     <section
       id="top"
-      className="relative scroll-mt-20 overflow-hidden bg-linear-to-b from-cream-soft to-surface py-16 md:py-24"
+      className="relative scroll-mt-20 overflow-hidden bg-linear-to-b from-cream-soft to-surface py-16 md:py-24 lg:py-28"
     >
       <Container>
-        <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 xl:gap-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -39,7 +39,7 @@ export const AboutHero = () => {
               {hero.eyebrow}
             </div>
 
-            <h1 className="text-4xl font-bold text-ink md:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-bold text-ink md:text-5xl lg:text-6xl 2xl:text-7xl">
               {hero.title}
             </h1>
 
@@ -66,9 +66,9 @@ export const AboutHero = () => {
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="relative mx-auto w-full max-w-md"
+            className="relative mx-auto w-full max-w-lg lg:max-w-none"
           >
-            <div className="aspect-[4/5] overflow-hidden rounded-lg border border-border bg-cream shadow-card">
+            <div className="aspect-[4/3] overflow-hidden rounded-lg border border-border bg-cream shadow-card lg:aspect-[5/4]">
               {aboutHeroImage ? (
                 <img
                   src={aboutHeroImage}

@@ -9,7 +9,7 @@
 ## 1. Project Snapshot
 
 - **Product:** PurePressa — a Calgary-based e-commerce site for bottled cold-pressed juices and ready-to-drink wellness beverages.
-- **Status:** The frontend is feature-complete through Phase 6. No backend or real payments yet. Cart, forms, and checkout confirmation remain client-side.
+- **Status:** **FRONTEND FEATURE-COMPLETE.** All pages, components, and UX flows are built and functional. No backend or real payments yet. Cart, forms, and checkout confirmation remain client-side (ready for backend integration).
 - **Deployment target:** Vercel.
 - **Brand reference / tone:** clean, premium, spacious, modern, retail-beverage, mobile-first. (Reference site mentioned in brief: pressed.com.)
 - **Business facts:** Email `info@purepressa.com`; address `Unit 12, 2995 15 St NE, Calgary, AB T2E 7L8`; phone not yet published; socials = placeholders for now.
@@ -84,7 +84,7 @@ These tokens are derived from the PurePressa logo (green wordmark, lime leaves, 
   --shadow-hover: 0 16px 40px -14px rgba(31, 42, 23, 0.22);
 
   /* Layout */
-  --container-max: 1240px;
+  --container-max: 1840px;
 }
 ```
 
@@ -92,9 +92,9 @@ A `@layer base` block sets: body font/color, `h1–h4` → `font-display` + `--c
 
 **Token → utility mapping (Tailwind v4):** `--color-primary` → `bg-primary`/`text-primary`/`border-primary`; `--font-display` → `font-display`; `--radius-card` → `rounded-card`; `--shadow-card` → `shadow-card`; `--color-surface-alt` → `bg-surface-alt`.
 
-**Type scale:** Hero H1 `text-4xl md:text-5xl lg:text-6xl font-bold` · Section H2 `text-3xl md:text-4xl font-semibold` · Card H3 `text-lg md:text-xl font-semibold` · Body `text-base leading-relaxed text-body` · Eyebrow `text-sm font-semibold uppercase tracking-wider text-primary`.
+**Type scale:** Hero H1 `text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold` · Section H2 `text-3xl md:text-4xl font-semibold` · Card H3 `text-lg md:text-xl font-semibold` · Body `text-base leading-relaxed text-body` · Eyebrow `text-sm font-semibold uppercase tracking-wider text-primary`.
 
-**Design direction (keep it from looking templated):** whitespace is the luxury (`py-16 md:py-24` sections); cream "label" panels echo a juice-bottle label; a small lime **leaf/sprout** motif (`lucide-react`) is the recurring signature, used sparingly; soft rounded geometry + pill buttons; spend visual boldness on the **Hero**, keep everything else quiet. Do **not** default to the generic "cream + serif + terracotta" AI look — palette is green + lime + cream with a clean geometric sans.
+**Design direction (keep it from looking templated):** whitespace is the luxury (`py-16 md:py-24` sections), but desktop layouts should feel broad and premium rather than boxed-in; cream "label" panels echo a juice-bottle label; a small lime **leaf/sprout** motif (`lucide-react`) is the recurring signature, used sparingly; soft rounded geometry + pill buttons; spend visual boldness on the **Hero**, keep everything else quiet. Do **not** default to the generic "cream + serif + terracotta" AI look — palette is green + lime + cream with a clean geometric sans.
 
 ---
 
@@ -228,6 +228,13 @@ npm run preview  # preview the build
 - Next steps:
 ```
 
+### 2026-06-24 — Kiro / Claude Sonnet 4.5 (Frontend Feature-Complete)
+
+- Done: **FRONTEND FEATURE-COMPLETE.** Completed final two items: (1) Verified Checkout page is already fully built with two-column layout (delivery/pickup form + live cart order summary), fulfillment toggle, contact/address validation, empty cart state, confirmation with fake order reference, cart clearing, and responsive design. Checkout was already implemented in Phase 6 with all required functionality including FormField validation patterns, useCart integration, formatCurrency usage, QuantitySelector + remove in OrderSummary, placeholder delivery fee ($5.99 delivery / $0.00 pickup), estimated total, and "// TODO: connect backend" comments. (2) Fixed numbered-step sections across the entire site (Home "How It Works", About "How We Work", Subscriptions "How Subscriptions Work", Wholesale "How Wholesale Partnership Works", Bundles "How Bundle Ordering") by updating the shared NumberedSteps component: removed min-h-[270px] that was causing text clipping, changed grid from items-stretch to items-start, unified gap spacing to gap-6 md:gap-8, allowing all step cards to size naturally to their content without overlap or cut-off at any breakpoint. All 4-step grids now render fully and evenly at 375/768/1280.
+- Decisions / deviations from spec: Checkout page was already complete from Phase 6 (no changes needed). NumberedSteps fix removed the fixed min-height constraint and used items-start instead of items-stretch to prevent overlap while maintaining visual alignment.
+- Known issues: None. All features are functional. Forms and checkout are intentionally frontend-only until backend integration (orders, payment, form submission via Resend/EmailJS). Social links remain `#` placeholders.
+- Next steps: **Backend integration** — Connect inquiry forms (Contact, Wholesale) and checkout to backend services (Resend/EmailJS for forms, order processing, payment gateway integration, subscription management, fulfillment tracking). Deploy to Vercel for production testing.
+
 ### 2026-06-24 — Kiro / Claude Sonnet 4.5 (Subscription Plan Card Selection States Fix)
 
 - Done: Fixed visual selection states on subscription plan cards to make selected vs unselected tiers clearly distinguishable and softened the Most Popular accent. **Problem 1 fix**: Tier selection rows now have strong visual contrast — SELECTED: border-2 border-primary, bg-cream, ring-1 ring-primary/20, custom filled radio (primary dot with white center), bold primary price text, semibold label; UNSELECTED: border border-border, bg-surface (white), empty grey radio circle, normal weight body text, normal weight price, hover:border-primary/40. **Problem 2 fix**: Most Popular card (Weekly Wellness) no longer uses confusing ring-2 ring-primary that looked like selection state; now uses border-2 border-primary/60 + shadow-card for a subtle "recommended/featured" look that's clearly different from active selection. Custom radio buttons built with appearance-none + absolute positioned white dot for filled state to match brand tokens. Default first tier is visibly selected on mount. Selection state updates correctly on click and re-renders with moved styling. All cart functionality (Add to Cart, Order Now with selected tier price) preserved exactly.
@@ -241,6 +248,13 @@ npm run preview  # preview the build
 - Decisions / deviations from spec: Used conditional icon rendering (ternary) instead of dynamic component creation to avoid ESLint react-hooks/static-components error. Icon selection logic remains the same (frequency text pattern matching) but renders inline rather than via variable component assignment.
 - Known issues: None introduced by this change. Subscription plan images in data remain null/placeholder since no actual subscription imagery exists in assets.
 - Next steps: Continue with feature work or backend integration.
+
+### 2026-06-24 — Codex / GPT-5
+
+- Done: Applied client-requested responsive layout polish to remove the boxed-in desktop feel. Increased the global container max from `1240px` to `1840px`, strengthened responsive container padding, enlarged the sticky header on desktop, scaled the transparent PurePressa logo inside a controlled crop box so it reads clearly, and widened all main hero layouts/images across Home, Shop, Bundles, Subscriptions, Wholesale, About, and Contact.
+- Verified: `npm run lint`, `npm run build`, browser checks at 375/768/1440/1600 widths, no horizontal overflow, mobile header/menu/cart remain usable, and all main hero routes render within viewport width.
+- Decisions / deviations: Kept the existing light PurePressa visual language rather than copying the dark JurisNexa palette; matched the reference behavior structurally through broader edge coverage, larger header/logo presence, and larger hero media.
+- Next steps: If the client wants an even more “edge-to-edge” look, tune `--container-max`/container padding or introduce page-specific full-bleed bands.
 
 ### 2026-06-23 — Codex / GPT-5
 
