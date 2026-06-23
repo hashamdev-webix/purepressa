@@ -29,7 +29,7 @@ The development server runs at `http://localhost:5173` by default.
 ## Tech Stack
 
 - **Build Tool:** Vite
-- **Framework:** React 18 (JavaScript, not TypeScript)
+- **Framework:** React 19 (JavaScript, not TypeScript)
 - **Styling:** Tailwind CSS v4 (via `@tailwindcss/vite`)
 - **Routing:** React Router v7
 - **Animation:** Framer Motion
@@ -46,16 +46,19 @@ src/
 ├─ assets/         # Images, logos, static files
 ├─ components/
 │  ├─ cart/        # Cart drawer
+│  ├─ checkout/    # Checkout order summary
+│  ├─ forms/       # Shared validated inquiry form
 │  ├─ layout/      # Navbar, Footer, Layout
 │  ├─ product/     # ProductCard, BundleCard
+│  ├─ subscription/# Subscription plan cards
 │  └─ ui/          # Reusable UI primitives
 ├─ context/        # CartContext (client-side cart)
 ├─ data/           # All content (products, bundles, navigation, site info)
 ├─ hooks/          # useCart, useScrollLock
-├─ lib/            # Utilities (cn, format)
+├─ lib/            # Utilities (cn, format, validation)
 ├─ pages/          # Route pages
 ├─ routes/         # AppRoutes configuration
-├─ sections/home/  # Home page sections (12 total)
+├─ sections/       # Page sections for every route
 ├─ styles/         # globals.css (design tokens)
 ├─ App.jsx
 └─ main.jsx
@@ -88,6 +91,7 @@ All content lives in **`src/data/`**:
 - `products.js` — Product catalog
 - `bundles.js` — Bundle packs
 - `subscriptions.js` — Subscription plans
+- `about.js`, `checkout.js`, `contact.js`, `wholesale.js` — Page content/config
 - `categories.js` — Product categories
 - `navigation.js` — Main nav + footer nav
 - `site.js` — Site name, email, address, socials
@@ -100,8 +104,10 @@ No hardcoded content in JSX — edit the data files.
 
 - **Client-side cart** (localStorage persistence, slide-out drawer)
 - **Responsive navbar** (desktop dropdowns + mobile accordion menu)
-- **Full home page** with 12 sections (hero, categories, products, bundles, subscriptions, wholesale, etc.)
-- **Stub pages** for Shop, Bundles, Subscriptions, Wholesale, About, Contact, Checkout (on-brand placeholders)
+- **Complete responsive pages** for Home, Shop, Bundles, Subscriptions, Wholesale, About, Contact, and Checkout
+- **Product search/filter/sort**, custom pack builder, and custom subscription builder
+- **Accessible validated forms** for Contact, Wholesale, and Checkout
+- **Live-cart checkout** with delivery/pickup, order summary, and frontend confirmation
 - **Subtle scroll animations** (respects `prefers-reduced-motion`)
 - **Accessible** (semantic HTML, ARIA labels, keyboard navigation, focus states)
 
@@ -127,18 +133,15 @@ npm run build  # Must pass clean (no errors/warnings)
 
 ---
 
-## Next Steps (Future Phases)
+## Next Steps
 
-Phase 1 (this release) = foundation + complete Home + stub pages.
+The frontend is feature-complete. Remaining work is backend integration:
 
-**Coming later:**
-
-- Phase 2: Full Shop page (filters, sort, search, grid)
-- Phase 3: Full Bundles page
-- Phase 4: Full Subscriptions page
-- Phase 5: Full Wholesale + Contact pages (forms with validation)
-- Phase 6: Full Checkout + Build Your Pack flow
-- Backend integration (orders, real cart, payments)
+- Contact and wholesale form delivery (for example, Resend or EmailJS)
+- Persistent orders and customer records
+- Payment processing
+- Fulfillment and delivery logic
+- Real subscription lifecycle management
 
 ---
 
@@ -148,4 +151,4 @@ Contact: **info@purepressa.com**
 
 ---
 
-© 2025 PurePressa. All rights reserved.
+© 2026 PurePressa. All rights reserved.

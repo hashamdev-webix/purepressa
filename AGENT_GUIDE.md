@@ -9,7 +9,7 @@
 ## 1. Project Snapshot
 
 - **Product:** PurePressa — a Calgary-based e-commerce site for bottled cold-pressed juices and ready-to-drink wellness beverages.
-- **This effort:** **Frontend only.** No backend, no real payments. Cart is client-side. Forms validate on the client and have `// TODO: connect backend` submit handlers.
+- **Status:** The frontend is feature-complete through Phase 6. No backend or real payments yet. Cart, forms, and checkout confirmation remain client-side.
 - **Deployment target:** Vercel.
 - **Brand reference / tone:** clean, premium, spacious, modern, retail-beverage, mobile-first. (Reference site mentioned in brief: pressed.com.)
 - **Business facts:** Email `info@purepressa.com`; address `Unit 12, 2995 15 St NE, Calgary, AB T2E 7L8`; phone not yet published; socials = placeholders for now.
@@ -21,7 +21,7 @@
 | Concern     | Choice                                                                                                |
 | ----------- | ----------------------------------------------------------------------------------------------------- |
 | Build tool  | Vite                                                                                                  |
-| Framework   | React 18, **JavaScript (`.jsx`)** — not TypeScript                                                    |
+| Framework   | React 19, **JavaScript (`.jsx`)** — not TypeScript                                                    |
 | Styling     | **Tailwind CSS v4** via `@tailwindcss/vite` plugin. **No `tailwind.config.js`** — theme lives in CSS. |
 | Routing     | `react-router-dom` (v6/v7), `Layout` route wraps all pages                                            |
 | Animation   | `framer-motion` (subtle, restrained)                                                                  |
@@ -106,17 +106,18 @@ src/
 ├─ components/
 │  ├─ layout/  Layout, Navbar, NavDropdown, MobileMenu, Footer, ScrollToTop
 │  ├─ cart/    CartDrawer
+│  ├─ checkout/ OrderSummary
 │  ├─ forms/   InquiryForm
 │  ├─ product/ ProductCard, BundleCard
 │  ├─ subscription/ SubscriptionPlanCard
 │  └─ ui/      Button, Container, Section, SectionHeading, Badge, Accordion,
-│              QuantitySelector, FormField, MediaPlaceholder
+│              QuantitySelector, FormField, MediaPlaceholder, NumberedSteps
 ├─ sections/home/  Hero, QuickValuePoints, AboutIntro, ShopByCategory,
 │                  FeaturedProducts, BundlesPreview, SubscriptionPreview,
 │                  WholesalePreview, HowItWorks, WhyChooseUs, DeliveryPickup, FinalCTA
-├─ sections/{shop,bundles,subscriptions,wholesale,contact}/  Full page sections
-├─ pages/      Home, Shop, Bundles, Subscriptions, Wholesale, Contact (full);
-│              About, Checkout (stubs); NotFound
+├─ sections/{shop,bundles,subscriptions,wholesale,contact,about}/
+├─ pages/      Home, Shop, Bundles, Subscriptions, Wholesale, About,
+│              Contact, Checkout, NotFound (all complete)
 ├─ context/    CartContext
 ├─ data/       site.js, navigation.js, categories.js, products.js, bundles.js, subscriptions.js
 ├─ hooks/      useCart, useScrollLock
@@ -197,7 +198,7 @@ Audit the repo and check off what already exists; complete the rest.
 - [x] **Phase 3:** Bundles page (filter/search/sort grid + working custom pack builder)
 - [x] **Phase 4:** Subscriptions page (six plans + working custom subscription builder)
 - [x] **Phase 5:** Wholesale + Contact (full pages + accessible validated forms)
-- **Phase 6:** About + Checkout + final polish
+- [x] **Phase 6:** About + Checkout + final polish
 - **Later:** Backend (orders, real cart, subscriptions, form submission)
 
 ---
@@ -226,6 +227,13 @@ npm run preview  # preview the build
 - Known issues:
 - Next steps:
 ```
+
+### 2026-06-23 — Codex / GPT-5
+
+- Done: **Phase 6 COMPLETE — FRONTEND FEATURE-COMPLETE.** Replaced the About stub with the full nine-section About experience: branded image hero, Who We Are, mission/vision, How We Work, values, product range, customer segments, accessible FAQ, and final CTA. Replaced the Checkout stub with a live-cart two-column checkout supporting Delivery/Pickup, controlled contact/address fields, required/email/phone validation, first-error focus, conditional delivery fields, pickup messaging, interactive quantities/removal, placeholder delivery fee, estimated total, empty-cart state, fake `PP-{timestamp}` confirmation, confirmation focus, and cart clearing. Added About/Checkout data modules, reusable order summary, shared validation helpers, and an in-flow `NumberedSteps` component used across Home, Bundles, Subscriptions, Wholesale, and About to eliminate clipped/overlapping number badges. Final polish added semantic dialog roles to cart/mobile navigation, improved accordion ARIA relationships, explicit non-submit button types, descriptive remove labels, branded favicon, unique page metadata, working About anchors, horizontal overflow prevention for offscreen motion transforms, starter-asset cleanup, and the requested 404 `Back to Home` action. Verified both checkout modes, live totals, cart persistence/clearing, FAQ, anchors, menu/drawer Escape behavior, all routes, console, and 375/768/1280 layouts.
+- Decisions / deviations from spec: The flat delivery fee remains a clearly labelled `$5.99` placeholder and pickup is `$0.00`. Checkout intentionally creates only a local confirmation and no payment or network request. The existing About image is auto-discovered and used in the hero. The shared numbered-step cards use normal document flow and minimum heights rather than negative-position number badges.
+- Known issues: Inquiry forms and checkout are frontend-only. Payment, order persistence, transactional email, fulfillment logic, and real subscription management still require backend integration. Social links remain `#` placeholders, and Wholesale/Contact hero artwork still uses branded placeholders.
+- Next steps: Backend integration — forms (Resend/EmailJS), orders, payment, fulfillment, and subscription management.
 
 ### 2026-06-23 — Codex / GPT-5
 
