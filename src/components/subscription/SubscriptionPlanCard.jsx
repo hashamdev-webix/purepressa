@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight,
+  Building2,
   CalendarDays,
-  Package,
+  Repeat,
   ShoppingCart,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { useCart } from "@/hooks/useCart";
 import { formatCurrency } from "@/lib/format";
 import { cn } from "@/lib/cn";
@@ -22,6 +22,10 @@ export const SubscriptionPlanCard = ({
   const { addItem, openCart } = useCart();
   const [selectedTierIndex, setSelectedTierIndex] = useState(0);
   const selectedTier = plan.tiers[selectedTierIndex];
+
+  const isMostPopular =
+    plan.badges?.some((badge) => badge.toLowerCase().includes("popular")) ||
+    false;
 
   const createCartItem = () => ({
     id: `sub-${plan.id}-${selectedTier.label}`,
@@ -41,142 +45,165 @@ export const SubscriptionPlanCard = ({
     navigate("/checkout");
   };
 
+  // Determine icon based on frequency
+  const lower = plan.frequency.toLowerCase();
+  const showRepeatIcon =
+    lower.includes("weekly") && (lower.includes("or") || lower.includes(","));
+  const showBuildingIcon =
+    lower.includes("business") || lower.includes("office");
+
   return (
     <article
       className={cn(
-        "group flex h-full flex-col overflow-hidden rounded-card border border-border bg-surface transition-all duration-300 hover:shadow-hover",
+        "group flex h-full flex-col rounded-card bg-surface p-6 shadow-soft transition-all duration-300 hover:shadow-card md:p-7",
+        isMostPopular
+          ? "border-2 border-primary/60 shadow-card"
+          : "border border-border",
         className,
       )}
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-cream">
-        {plan.image ? (
-          <img
-            src={plan.image}
-            alt={plan.name}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-          />
+      {/* Frequency pill at top */}
+      <div className="inline-flex items-center gap-1.5 self-start rounded-pill bg-cream px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
+        {showRepeatIcon ? (
+          <Repeat className="h-3.5 w-3.5" />
+        ) : showBuildingIcon ? (
+          <Building2 className="h-3.5 w-3.5" />
         ) : (
-          <MediaPlaceholder iconSize={64} />
+          <CalendarDays className="h-3.5 w-3.5" />
         )}
-        {plan.badges?.length > 0 && (
-          <div className="absolute left-3 top-3 flex flex-wrap gap-2">
-            {plan.badges.map((badge) => (
-              <Badge key={badge} variant="primary">
-                {badge}
-              </Badge>
-            ))}
-          </div>
-        )}
-        {plan.isBuilder && (
-          <div className="absolute right-3 top-3">
-            <Badge variant="accent">
-              <Package className="h-3 w-3" />
-              Customize
-            </Badge>
-          </div>
-        )}
+        {plan.frequency}
       </div>
 
-      <div className="flex flex-1 flex-col p-5">
-        <div>
-          <h3 className="text-xl font-semibold text-ink">{plan.name}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-body">
-            {plan.description}
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Badge variant="muted">
-              <CalendarDays className="h-3 w-3" />
-              {plan.frequency}
-            </Badge>
-            <span className="rounded-pill border border-border px-3 py-1 text-xs font-medium text-muted">
-              Best for: {plan.bestFor}
-            </span>
-          </div>
+      {/* Most Popular badge (if applicable) */}
+      {isMostPopular && (
+        <div className="mt-3">
+          <Badge variant="primary">Most Popular</Badge>
         </div>
+      )}
 
-        <div className="mt-6 flex flex-1 flex-col justify-end border-t border-border pt-5">
-          {plan.ctaType === "contact" ? (
-            <>
-              <p className="text-lg font-bold text-primary">{plan.priceNote}</p>
-              <Button as={Link} to="/contact" className="mt-5 w-full">
+      {/* Plan name */}
+      <h3 className="mt-4 text-xl font-semibold text-ink">{plan.name}</h3>
+
+      {/* Description */}
+      <p className="mt-2 text-sm leading-relaxed text-body">
+        {plan.description}
+      </p>
+
+      {/* Best for line */}
+      <div className="mt-3 border-t border-border pt-3">
+        <p className="text-xs text-muted">Best for: {plan.bestFor}</p>
+      </div>
+
+      {/* Pricing area - push to bottom */}
+      <div className="mt-auto pt-5">
+        {plan.ctaType === "contact" ? (
+          <>
+            <p className="text-primary font-semibold">{plan.priceNote}</p>
+            <div className="mt-5">
+              <Button as={Link} to="/contact" className="w-full">
                 Contact Us
                 <ArrowRight className="h-5 w-5" />
               </Button>
-            </>
-          ) : plan.isBuilder ? (
-            <>
-              <p className="text-lg font-bold text-primary">{plan.priceNote}</p>
-              <p className="mt-1 text-sm text-muted">
-                Choose your size, products, and delivery frequency.
-              </p>
-              <Button
-                onClick={onBuildSubscription}
-                variant="secondary"
-                className="mt-5 w-full"
-              >
+            </div>
+          </>
+        ) : plan.isBuilder ? (
+          <>
+            <p className="text-2xl font-bold text-primary">{plan.priceNote}</p>
+            <p className="mt-1 text-sm text-muted">
+              Choose your size, products, and delivery frequency.
+            </p>
+            <div className="mt-5">
+              <Button onClick={onBuildSubscription} className="w-full">
                 Build Your Subscription
                 <ArrowRight className="h-5 w-5" />
               </Button>
-            </>
-          ) : (
-            <>
-              <fieldset>
-                <legend className="mb-3 text-sm font-semibold text-ink">
-                  Choose bottle quantity
-                </legend>
-                <div className="space-y-2">
-                  {plan.tiers.map((tier, index) => {
-                    const inputId = `${plan.id}-tier-${index}`;
-                    const isSelected = selectedTierIndex === index;
+            </div>
+          </>
+        ) : (
+          <>
+            <fieldset>
+              <legend className="mb-3 text-sm font-medium text-ink">
+                Choose bottle quantity
+              </legend>
+              <div className="space-y-2">
+                {plan.tiers.map((tier, index) => {
+                  const inputId = `${plan.id}-tier-${index}`;
+                  const isSelected = selectedTierIndex === index;
 
-                    return (
-                      <label
-                        key={tier.label}
-                        htmlFor={inputId}
-                        className={cn(
-                          "flex cursor-pointer items-center justify-between gap-3 rounded-md border px-3 py-2.5 transition-colors",
-                          isSelected
-                            ? "border-primary bg-cream"
-                            : "border-border hover:border-primary",
-                        )}
-                      >
-                        <span className="flex items-center gap-2">
+                  return (
+                    <label
+                      key={tier.label}
+                      htmlFor={inputId}
+                      className={cn(
+                        "flex cursor-pointer items-center justify-between gap-3 rounded-md px-4 py-3 transition-all",
+                        isSelected
+                          ? "border-2 border-primary bg-cream ring-1 ring-primary/20"
+                          : "border border-border bg-surface hover:border-primary/40",
+                      )}
+                    >
+                      <span className="flex items-center gap-2">
+                        <div className="relative flex h-4 w-4 items-center justify-center">
                           <input
                             id={inputId}
                             type="radio"
                             name={`${plan.id}-tier`}
                             checked={isSelected}
                             onChange={() => setSelectedTierIndex(index)}
-                            className="h-4 w-4 accent-primary"
+                            className={cn(
+                              "h-4 w-4 cursor-pointer appearance-none rounded-full border-2 transition-all",
+                              isSelected
+                                ? "border-primary bg-primary"
+                                : "border-muted bg-surface",
+                            )}
                           />
-                          <span className="text-sm font-semibold text-ink">
-                            {tier.label}
-                          </span>
+                          {isSelected && (
+                            <span className="pointer-events-none absolute h-1.5 w-1.5 rounded-full bg-surface" />
+                          )}
+                        </div>
+                        <span
+                          className={cn(
+                            "text-sm",
+                            isSelected
+                              ? "font-semibold text-ink"
+                              : "font-normal text-body",
+                          )}
+                        >
+                          {tier.label}
                         </span>
-                        <span className="text-sm font-bold text-primary">
+                      </span>
+                      <span className="text-sm">
+                        <span
+                          className={cn(
+                            isSelected
+                              ? "font-bold text-primary"
+                              : "font-normal text-body",
+                          )}
+                        >
                           {formatCurrency(tier.price)}
-                          <span className="font-normal text-muted">
-                            {tier.unit}
-                          </span>
                         </span>
-                      </label>
-                    );
-                  })}
-                </div>
-              </fieldset>
-
-              <div className="mt-5 grid gap-2 sm:grid-cols-2">
-                <Button onClick={handleAddToCart} variant="outline" size="sm">
-                  <ShoppingCart className="h-4 w-4" />
-                  Add to Cart
-                </Button>
-                <Button onClick={handleOrderNow} size="sm">
-                  Order Now
-                </Button>
+                        <span className="text-muted">{tier.unit}</span>
+                      </span>
+                    </label>
+                  );
+                })}
               </div>
-            </>
-          )}
-        </div>
+            </fieldset>
+
+            <div className="mt-5 flex gap-3">
+              <Button
+                onClick={handleAddToCart}
+                variant="outline"
+                className="flex-1"
+              >
+                <ShoppingCart className="h-4 w-4" />
+                Add to Cart
+              </Button>
+              <Button onClick={handleOrderNow} className="flex-1">
+                Order Now
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     </article>
   );

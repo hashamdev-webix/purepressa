@@ -9,20 +9,18 @@ export const SubscriptionPlans = ({ onBuildSubscription }) => {
   const { plans } = subscriptionsContent;
 
   return (
-    <Section
-      id="subscription-plans"
-      className="scroll-mt-20 bg-cream-soft"
-    >
+    <Section id="subscription-plans" className="scroll-mt-20 bg-cream-soft">
       <Container>
         <SectionHeading eyebrow={plans.eyebrow} title={plans.title} />
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
           {subscriptions.map((plan) => (
-            <SubscriptionPlanCard
-              key={plan.id}
-              plan={plan}
-              onBuildSubscription={onBuildSubscription}
-            />
+            <div key={plan.id} className="h-full">
+              <SubscriptionPlanCard
+                plan={plan}
+                onBuildSubscription={onBuildSubscription}
+              />
+            </div>
           ))}
         </div>
       </Container>
