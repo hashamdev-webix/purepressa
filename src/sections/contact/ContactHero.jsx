@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { Leaf } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { contactContent } from "@/data/contact";
+import contactHero from "@/assets/images/hero/contact-hero.jpg";
 
 export const ContactHero = () => {
   const { hero } = contactContent;
@@ -40,8 +40,13 @@ export const ContactHero = () => {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="relative mx-auto w-full max-w-md"
           >
-            <div className="aspect-[4/5] overflow-hidden rounded-lg border border-border bg-cream shadow-card">
-              <MediaPlaceholder iconSize={84} />
+            <div className="aspect-[4/5] overflow-hidden rounded-lg border border-border shadow-card">
+              <img
+                src={contactHero}
+                alt="PurePressa customer service and contact information"
+                className="h-full w-full rounded-lg object-cover"
+                loading="eager"
+              />
             </div>
             <div className="absolute -bottom-5 left-4 right-4 rounded-card border border-border bg-surface/95 p-4 text-center shadow-soft backdrop-blur-sm sm:left-8 sm:right-8">
               <p className="font-display text-lg font-semibold text-ink">

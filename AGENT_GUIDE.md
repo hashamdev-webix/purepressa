@@ -249,6 +249,13 @@ npm run preview  # preview the build
 - Known issues: No files currently exist under `src/assets/images/subscriptions/`, so the six plan cards use branded placeholders. Recurring-order account management and actual subscription billing remain frontend-only future backend work. Wholesale, About, Contact, and Checkout remain intentionally scoped stubs.
 - Next steps: **Phase 5** — Build the full Wholesale and Contact pages with client-side validation.
 
+### 2026-06-23 — Kiro / Claude Sonnet 4.5 (Additional Hero Images)
+
+- Done: Wired up Contact and Wholesale hero images. Added contact-hero.jpg to ContactHero component with alt text "PurePressa customer service and contact information", and wholesale-hero.jpg to WholesaleHero component with alt text "PurePressa wholesale partnership and bulk juice orders". Both images use eager loading, proper aspect ratios, rounded corners, object-cover, and preserve floating caption cards. Removed unused MediaPlaceholder imports. Build passes clean, dev server runs without errors.
+- Decisions / deviations from spec: None — both specified images exist and were wired as requested.
+- Known issues: None introduced by this change.
+- Next steps: Continue with Phase 4 or other feature work.
+
 ### 2026-06-23 — Kiro / Claude Sonnet 4.5 (Image Wiring)
 
 - Done: Wired up six hero/section images from src/assets/images/ into their respective components. Replaced MediaPlaceholder with actual images in: Home Hero (home-hero.jpg), Home About section (about-intro.jpg), Home Subscription Preview (subscription-promo.jpg), Shop Hero (shop-hero.jpg), Bundles Hero (bundles-hero.jpg), and Subscriptions Hero (subscriptions-hero.jpg). All images properly imported, rendered with correct aspect ratios, rounded corners, object-cover, appropriate alt text, and loading strategy (eager for hero images, lazy for section images). Layout and decorative elements (floating caption cards, leaf accents) preserved exactly. Removed unused MediaPlaceholder imports. Build passes clean, dev server runs without errors.
